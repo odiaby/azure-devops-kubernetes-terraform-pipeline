@@ -13,11 +13,6 @@ steps:
     secureFile: 'azure_rsa.pub'
 - task: TerraformCLI@0
   inputs:
-    command: 'validate'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    allowTelemetryCollection: true
-- task: TerraformCLI@0
-  inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
     backendType: 'azurerm'
