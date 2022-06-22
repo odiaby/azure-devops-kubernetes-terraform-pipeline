@@ -3,6 +3,8 @@
 # Uses default VPC and Subnet. Create Your Own VPC and Private Subnets for Prod Usage.
 # terraform-backend-state-in28minutes-123
 # AKIA4AHVNOD7OOO6T4KI
+# arn:aws:s3:::terraform-backend-state-odiaby-123
+
 
 
 terraform {
@@ -26,14 +28,14 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.cluster.token
   load_config_file       = false
-  version                = "~> 1.9"
+  # version                = "~> 1.9"
 }
 
 module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
+  subnets         = ["subnet-0755542d79ee0dd90", "subnet-0fd22663db416f43e"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
