@@ -85,6 +85,30 @@ self_managed_node_group_defaults = {
 }
 }
 
+# aws-auth configmap
+  manage_aws_auth_configmap = true
+
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::66666666666:role/role1"
+      username = "role1"
+      groups   = ["system:masters"]
+    },
+  ]
+
+  aws_auth_users = [
+    {
+      userarn  = "arn:aws:iam::66666666666:user/user1"
+      username = "user1"
+      groups   = ["system:masters"]
+    }
+  ]
+
+  aws_auth_accounts = [
+    "777777777777",
+    "888888888888",
+  ]
+
 data "aws_eks_cluster" "cluster" {
   name = module.in28minutes-cluster.cluster_id
 }
