@@ -85,7 +85,18 @@ self_managed_node_group_defaults = {
 }
 }
 
-# aws-auth configmap
+fargate_profiles = {
+    default = {
+      name = "default"
+      selectors = [
+        {
+          namespace = "default"
+        }
+      ]
+    }
+  }
+
+  # aws-auth configmap
   manage_aws_auth_configmap = true
 
   aws_auth_roles = [
