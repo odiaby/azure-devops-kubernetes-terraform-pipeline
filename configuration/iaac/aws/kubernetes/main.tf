@@ -43,10 +43,10 @@ module "in28minutes-cluster" {
   #vpc_id         = "vpc-1234556abcdef"
 self_managed_node_group_defaults = {
     instance_type                          = "t2.micro"
-    update_launch_template_default_version = true
-    # iam_role_additional_policies = [
-    # "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    # ]
+     update_launch_template_default_version = true
+     iam_role_additional_policies = [
+     "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+     ]
   }
 
   self_managed_node_groups = {
