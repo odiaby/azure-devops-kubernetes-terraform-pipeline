@@ -54,7 +54,7 @@ self_managed_node_group_defaults = {
       # name         = "mixed-1"
       max_size     = 5
       desired_size = 3
-      # min_size     = 3
+      min_size     = 3
     }
   }
 
@@ -65,11 +65,10 @@ self_managed_node_group_defaults = {
   }
 
   eks_managed_node_groups = {
-    blue = {}
     green = {
-      min_size     = 1
-      max_size     = 10
-      desired_size = 1
+      min_size     = 3
+      max_size     = 5
+      desired_size = 3
 
       instance_types = ["t2.micro"]
       capacity_type  = "SPOT"
