@@ -43,18 +43,18 @@ module "in28minutes-cluster" {
   #vpc_id         = "vpc-1234556abcdef"
 self_managed_node_group_defaults = {
     instance_type                          = "t2.micro"
-     update_launch_template_default_version = true
-     iam_role_additional_policies = [
-     "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    update_launch_template_default_version = true
+    iam_role_additional_policies = [
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
      ]
   }
 
   self_managed_node_groups = {
     one = {
-      name         = "mixed-1"
+      # name         = "mixed-1"
       max_size     = 5
       desired_size = 3
-      min_size     = 3
+      # min_size     = 3
     }
   }
 
@@ -85,40 +85,7 @@ self_managed_node_group_defaults = {
 }
 }
 
-fargate_profiles = {
-    default = {
-      name = "default"
-      selectors = [
-        {
-          namespace = "default"
-        }
-      ]
-    }
-  }
 
-  # aws-auth configmap
-  manage_aws_auth_configmap = true
-
-  aws_auth_roles = [
-    {
-      rolearn  = "arn:aws:iam::66666666666:role/role1"
-      username = "role1"
-      groups   = ["system:masters"]
-    },
-  ]
-
-  aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::66666666666:user/user1"
-      username = "user1"
-      groups   = ["system:masters"]
-    }
-  ]
-
-  aws_auth_accounts = [
-    "777777777777",
-    "888888888888",
-  ]
 
 data "aws_eks_cluster" "cluster" {
   name = module.in28minutes-cluster.cluster_id
