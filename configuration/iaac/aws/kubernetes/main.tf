@@ -57,6 +57,23 @@ self_managed_node_group_defaults = {
       min_size     = 3
     }
   }
+
+  # EKS Managed Node Group(s)
+  eks_managed_node_group_defaults = {
+    disk_size      = 30
+    instance_types = ["t2.micro"]
+  }
+
+  eks_managed_node_groups = {
+    blue = {}
+    green = {
+      min_size     = 1
+      max_size     = 10
+      desired_size = 1
+
+      instance_types = ["t2.micro"]
+      capacity_type  = "SPOT"
+    }
   # node_groups = [
   #   {
   #     instance_type = "t2.micro"
