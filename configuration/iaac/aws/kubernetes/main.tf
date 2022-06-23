@@ -83,6 +83,7 @@ self_managed_node_group_defaults = {
   #   }
   # ]
 }
+}
 
 data "aws_eks_cluster" "cluster" {
   name = module.in28minutes-cluster.cluster_id
