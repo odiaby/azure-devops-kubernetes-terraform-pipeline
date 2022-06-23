@@ -35,20 +35,35 @@ module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-0755542d79ee0dd90", "subnet-0fd22663db416f43e"] #CHANGE
-  #subnets = data.aws_subnet_ids.subnets.ids
+  subnets_ids     = ["subnet-0755542d79ee0dd90", "subnet-0fd22663db416f43e"] #CHANGE
+  # subnets         = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
+self_managed_node_group_defaults = {
+    instance_type                          = "t2.micro"
+    update_launch_template_default_version = true
+    # iam_role_additional_policies = [
+    # "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    # ]
+  }
 
-  node_groups = [
-    {
-      instance_type = "t2.micro"
-      max_capacity  = 5
-      desired_capacity = 3
-      min_capacity  = 3
+  self_managed_node_groups = {
+    one = {
+      name         = "mixed-1"
+      max_size     = 5
+      desired_size = 3
+      min_size     = 3
     }
-  ]
+  }
+  # node_groups = [
+  #   {
+  #     instance_type = "t2.micro"
+  #     max_capacity  = 5
+  #     desired_capacity = 3
+  #     min_capacity  = 3
+  #   }
+  # ]
 }
 
 data "aws_eks_cluster" "cluster" {
